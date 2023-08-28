@@ -1,0 +1,81 @@
+{% extends 'spaservices/main.html' %}
+{% block content %}
+<!--{% include 'spaservices/status.html'%}-->
+<style>
+    .profile-pic{
+        max-width: 150px;
+        max-height: 150px;
+        margin: 0 auto;
+        border-radius: 50%;
+    }
+</style>
+
+<div class="row">
+    
+    <div class="col-md-3">
+        <div class="card card-body">
+            <h5>Contact Information</h5>
+            <hr>
+            <img class="profile-pic" src="{{request.user.customer.profile_pic.url}}" alt = "upload Your profile profile-pic">
+            <br>
+            <br>
+             <p></p>
+
+            <h3>Loyalty Points:{{ customer.loyalty_points }}</h3>
+
+        </div>
+
+    </div>
+
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>Customer</h5>
+            <hr>
+            <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <input class= "btn btn-primary"  type="submit" name="Submit">
+            </form>
+
+        </div>
+
+    </div>
+
+<br>
+
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <p>Payment History</p>
+            <hr>
+            <table class=" table table-sm">
+                <tr>
+                    <th>Amount</th>
+                    <th>Service</th>
+                    <th>Date Paid</th>
+                </tr>
+
+                {% for payment in payments %}
+
+                <tr>
+                    <td>{{ payment.amount }}</td>
+                    <td>{{ payment.services.all|join:", " }}</td>
+                    <td>{{ payment.date_paid }}</td>
+                </tr>
+
+                {% endfor %}
+
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+{% endblock content %}

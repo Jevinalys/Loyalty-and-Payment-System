@@ -1,0 +1,88 @@
+{% extends 'spaservices/main.html' %}
+
+{% block content %}
+<br>
+
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>Customer</h5>
+            <hr>
+            <a class="btn btn-outline-info btn-sm btn-block" href="{% url 'payment_form' customers.id %}">Make Payment</a>
+
+        </div>
+
+    </div>
+
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>Contact Information</h5>
+            <hr>
+            <p>Name: {{customers.name}} </p>
+            <p>Phone: {{customers.phone}}</p>
+
+        </div>
+
+    </div>
+
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>Loyalty Points</h5>
+            <hr>
+            <p>Points : {{customers.loyalty_points}}</p>
+            
+            <a class="btn btn-outline-info btn-sm btn-block" href="{% url 'points' customers.id %}">Redeem Points</a>
+
+
+        </div>
+
+    </div>
+
+<br>
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+            <form action="" method="get">
+
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <p>Payment History</p>
+            <hr>
+            <table class=" table table-sm">
+                <tr>
+                    <th>Amount</th>
+                    <th>M-Pesa Code</th>
+                    <th>Service</th>
+                    <th>Date Paid</th>
+                </tr>
+
+                {% for payment in payments %}
+
+                <tr>
+                    <td>{{ payment.amount }}</td>
+                    <td>{{ payment.code }}</td>
+                    <td>{{ payment.services.all|join:", " }}</td>
+                    <td>{{ payment.date_paid }}</td>
+                </tr>
+
+                {% endfor %}
+
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'spaservices/main.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+            <form action="" method="get">
+                {{payFilter.form}}
+
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md">
+            <div class="card card-body">
+                <h5>Payments</h5>
+                </div>
+            <div class="card-body"> 
+                <table class="table table-sm">
+                    <tr>
+                        <th></th>
+                        <th>Customers</th>
+                        <th>Phone</th>
+                        <th>Amount</th>
+                        <th>Code</th>
+                        <th>Services</th>
+                        <th>Date Paid</th>
+                    </tr>
+
+                    {% for payments in payment %}
+                    <tr>
+                        <th></th>
+                        <td>{{payments.customer.name}}</td>
+                        <td>{{payments.customer.phone}}</td>
+                        <td>{{payments.amount}}</td>
+                        <td>{{payments.code}}</td>
+                        <td>{{payments.services.all|join:", "}}</td>
+                        <th>{{payments.date_paid}}</th>
+                    </tr>
+                    {% endfor %}
+    
+                </table>
+
+            </div>
+ 
+    
+            </div>
+    
+        
+
+    </div>
+
+</div>
+
+{% endblock %}
